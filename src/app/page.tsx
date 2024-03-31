@@ -23,15 +23,6 @@ import "@nlux/themes/nova.css";
 import { useEffect, useState } from "react";
 import { Check, ChevronRight, Wifi, X } from "react-feather";
 
-const webLLMAdapter: ChatAdapter = {
-  streamText: (message: string, observer: StreamingAdapterObserver): void => {
-    setTimeout(() => {
-      observer.next("Hello, I'm a custom adapter!");
-      observer.complete();
-    }, 100);
-  },
-};
-
 const chat = new webllm.ChatModule();
 let chatIsReloading = false;
 
@@ -43,6 +34,40 @@ const modelList = [
     local_id: "TinyLlama-1.1B",
   },
 ];
+
+const webLLMAdapter: ChatAdapter = {
+  streamText: async (
+    message: string,
+    observer: StreamingAdapterObserver,
+    { conversationHistory }
+  ) => {
+    const stream = await chat.chatCompletion({
+      stream: true,
+      messages: [
+        {
+          role: "system",
+          content: "You are a helpful assistant.",
+        },
+        ...(conversationHistory ?? []).map((message) => ({
+          role: (message.role === "ai" ? "assistant" : "user") as
+            | "assistant"
+            | "user",
+          content: message.message,
+        })),
+        {
+          role: "user",
+          content: message,
+        },
+      ],
+      temperature: 0.5,
+    });
+
+    for await (const chunk of stream) {
+      observer.next(chunk.choices[0].delta.content ?? "");
+    }
+    observer.complete();
+  },
+};
 
 export default function App() {
   const [model, setModel] = useState("TinyLlama-1.1B");
@@ -206,7 +231,7 @@ function IntroModal({
                 )}
                 <Text color="gray.400" fontSize="13px">
                   {progress.status === "error"
-                    ? `Please try using Google Chrome instead. Error: ${progress.error}`
+                    ? `Please try using Google Chrome on a Mac if possible. Error: ${progress.error}`
                     : progress.text}
                 </Text>
               </VStack>
