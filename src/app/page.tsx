@@ -23,7 +23,7 @@ import "@nlux/themes/nova.css";
 import { useEffect, useState } from "react";
 import { Check, ChevronRight, Wifi, X } from "react-feather";
 
-export const webLLMAdapter: ChatAdapter = {
+const webLLMAdapter: ChatAdapter = {
   streamText: (message: string, observer: StreamingAdapterObserver): void => {
     setTimeout(() => {
       observer.next("Hello, I'm a custom adapter!");
@@ -235,7 +235,9 @@ function TurnOffWifiModal({
   modalOpen: "intro" | "turn_off_wifi" | undefined;
   setModalOpen: (modal: "intro" | "turn_off_wifi" | undefined) => void;
 }) {
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [isOnline, setIsOnline] = useState(
+    typeof navigator !== "undefined" ? navigator.onLine : false
+  );
 
   useEffect(() => {
     const handleOnline = () => setIsOnline(true);
@@ -267,7 +269,10 @@ function TurnOffWifiModal({
               </Text>
               <HStack spacing={2}>
                 <Text fontWeight="500">Wi-Fi Status:</Text>
-                <Text fontWeight="500" color={isOnline ? "green.500" : "red.500"}>
+                <Text
+                  fontWeight="500"
+                  color={isOnline ? "green.500" : "red.500"}
+                >
                   {isOnline ? "Online" : "Offline"}
                 </Text>
               </HStack>
