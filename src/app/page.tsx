@@ -123,6 +123,7 @@ export default function App() {
         Offline GPT
       </Heading>
       <IntroModal
+        model={model}
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
         isModelReady={isModelReady}
@@ -140,11 +141,13 @@ export default function App() {
 }
 
 function IntroModal({
+  model,
   modalOpen,
   setModalOpen,
   isModelReady,
   progress,
 }: {
+  model: string;
   modalOpen: "intro" | "turn_off_wifi" | undefined;
   setModalOpen: (modal: "intro" | "turn_off_wifi" | undefined) => void;
   isModelReady: boolean;
@@ -163,7 +166,15 @@ function IntroModal({
     <Modal size="xxl" isOpen={modalOpen == "intro"} onClose={() => {}}>
       <ModalOverlay />
       <ModalContent maxWidth="800px" marginX={4}>
-        <ModalHeader>Welcome to Offline GPT</ModalHeader>
+        <ModalHeader>
+          <HStack width="full">
+            <Text>Welcome to Offline GPT</Text>
+            <Spacer />
+            <Text color="gray.400" fontWeight="normal" fontSize="14px">
+              {model}
+            </Text>
+          </HStack>
+        </ModalHeader>
         <ModalBody>
           <VStack align="start" spacing={4} paddingBottom={3}>
             <Text>
@@ -239,7 +250,6 @@ function IntroModal({
             <Spacer />
             <Button
               colorScheme="blue"
-              mr={3}
               onClick={() => setModalOpen("turn_off_wifi")}
               isDisabled={!isModelReady}
               rightIcon={<ChevronRight />}
@@ -309,7 +319,6 @@ function TurnOffWifiModal({
           <Spacer />
           <Button
             colorScheme="blue"
-            mr={3}
             onClick={() => setModalOpen(undefined)}
             rightIcon={<ChevronRight />}
           >
