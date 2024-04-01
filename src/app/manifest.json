@@ -9,19 +9,28 @@
   "start_url": "/",
   "icons": [
     {
-      "src": "/manifest-icons/icons-192.png",
+      "src": "/manifest-icons/logo-192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/manifest-icons/icons-256.png",
+      "src": "/manifest-icons/logo-256.png",
       "type": "image/png",
       "sizes": "256x256"
     },
     {
-      "src": "/manifest-icons/icons-512.png",
+      "src": "/manifest-icons/logo-512.png",
       "type": "image/png",
       "sizes": "512x512"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "pwa-screenshot.png",
+      "sizes": "640x320",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Application"
     }
   ]
 }

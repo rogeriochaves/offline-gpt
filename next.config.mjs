@@ -12,7 +12,7 @@ const nextConfig = {
 const withPWA = nextPWA({
   cacheOnFrontEndNav: true,
   aggressiveFrontEndNavCaching: true,
-  reloadOnOnline: true,
+  reloadOnOnline: false,
   swcMinify: true,
   dest: "public",
   fallbacks: {
