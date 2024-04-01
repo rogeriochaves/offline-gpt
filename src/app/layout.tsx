@@ -9,6 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Offline GPT",
   description: "Chat with LLMs offline directly in your browser",
+  metadataBase: new URL("https://offline-gpt.com"),
 };
 
 export default function RootLayout({
