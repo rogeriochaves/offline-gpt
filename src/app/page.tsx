@@ -15,6 +15,7 @@ import {
   Spacer,
   Text,
   VStack,
+  Link,
 } from "@chakra-ui/react";
 import * as webllm from "@mlc-ai/web-llm";
 import { ChatAdapter, StreamingAdapterObserver } from "@nlux/core";
@@ -118,10 +119,7 @@ export default function App() {
     progress.text.includes("Finish ");
 
   return (
-    <VStack padding={4} height="100vh" align="start">
-      <Heading as="h1" size="xl">
-        Offline GPT
-      </Heading>
+    <>
       <IntroModal
         model={model}
         modalOpen={modalOpen}
@@ -130,13 +128,89 @@ export default function App() {
         progress={progress}
       />
       <TurnOffWifiModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
-      <AiChat
-        adapter={webLLMAdapter}
-        promptBoxOptions={{
-          placeholder: "How can I help you today?",
-        }}
-      />
-    </VStack>
+
+      <VStack padding={4} height="100vh" align="center" spacing={4}>
+        <HStack width="full" align="start">
+          <Heading as="h1" size="xl" marginBottom={4}>
+            Offline GPT
+          </Heading>
+          <Spacer />
+          <Link href="#about" fontSize="22px" fontWeight="500" paddingRight={4}>
+            About
+          </Link>
+        </HStack>
+        <AiChat
+          className="custom-ai-chat-comp"
+          adapter={webLLMAdapter}
+          promptBoxOptions={{
+            placeholder: "How can I help you today?",
+          }}
+        />
+        <Spacer />
+        <Box width="full" textAlign="center">
+          made with ❤️ by{" "}
+          <a href="https://twitter.com/_rchaves_" target="_blank">
+            _rchaves_
+          </a>
+          .{" "}
+          <a
+            href="https://twitter.com/_rchaves_"
+            target="_blank"
+            style={{ textDecoration: "underline" }}
+          >
+            Follow me
+          </a>{" "}
+          on twitter.
+        </Box>
+      </VStack>
+      <VStack
+        id="about"
+        padding={4}
+        height="100vh"
+        align="start"
+        spacing={4}
+        maxWidth="800px"
+      >
+        <Heading as="h1" size="xl" marginBottom={4}>
+          About
+        </Heading>
+        <Text>
+          Offline GPT is made possible thanks to the amazing folks at{" "}
+          <a
+            href="https://webllm.mlc.ai/"
+            target="_blank"
+            style={{ textDecoration: "underline" }}
+          >
+            WebLLM
+          </a>
+          , a project which brings Local LLMs to the web browser, accelerated
+          with WebGPU, and of course, the whole community of open-source LLMs
+          and AI enthusiasts.
+        </Text>
+        <Text>
+          Offline GPT downloads a small large language model that stays cached
+          in your browser, allowing you to chat with the AI on your local
+          machine, even without an internet connection.
+        </Text>
+        <Text>
+          This also means that your <b>privacy</b> is guaranteed, as your
+          conversation never leaves your device. What{"'"}s between you and the
+          bot, stays between you and the bot.
+        </Text>
+        <Text>
+          If you enjoy the project and are interested in more stuff about LLMs,
+          follow me on{" "}
+          <a
+            href="https://twitter.com/_rchaves_"
+            target="_blank"
+            style={{ textDecoration: "underline" }}
+          >
+            Twitter
+          </a>{" "}
+          for more updates on it and other cool projects.
+        </Text>
+      </VStack>
+    </>
   );
 }
 
@@ -178,13 +252,14 @@ function IntroModal({
         <ModalBody>
           <VStack align="start" spacing={4} paddingBottom={3}>
             <Text>
-              Offline GPT runs directly and your browser and do not require an
+              Offline GPT runs directly in your browser and do not require an
               internet connection. Your conversation stays on your device and is
               not sent to any servers.
             </Text>
             <Text>
               You can chat with the AI and generate any text you want even in
-              airplane mode without installing any apps, with total privacy.
+              airplane mode with total privacy and without having to install an
+              app.
             </Text>
             <Text>
               On the first time you open this page, the model will be loaded, it

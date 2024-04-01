@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+.custom-ai-chat-comp.nluxc-root.nluxc-theme-nova {
+  --nluxc-border-radius-xs: 6px;
+  --nluxc-border-radius-s: 6px;
+  --nluxc-border-radius: 6px;
+  --nluxc-border-radius-m: 6px;
+  --nluxc-border-radius-l: 6px;
+}
+
+.nluxc-root :is(input, select, textarea) {
+  cursor: text !important;
+}
