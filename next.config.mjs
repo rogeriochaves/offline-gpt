@@ -22,10 +22,10 @@ const withPWA = nextPWA({
     // audio: ...,
     // video: ...,
   },
+  publicExcludes: ["!models/**/*"],
   workboxOptions: {
     disableDevLogs: true,
   },
-  // ... other options you like
 });
 
 export default withPWA(nextConfig);
