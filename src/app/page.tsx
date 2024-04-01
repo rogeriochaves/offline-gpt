@@ -266,6 +266,11 @@ function IntroModal({
               may take a few seconds to a few minutes depending on your device,
               but it will be cached for next time.
             </Text>
+            <Text>
+              After the first load, feel free to hit refresh or close the tab,
+              you can come back to offline-gpt.com anytime even without internet
+              and it will still work.
+            </Text>
           </VStack>
         </ModalBody>
 
