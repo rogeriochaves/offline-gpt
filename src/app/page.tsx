@@ -129,7 +129,7 @@ export default function App() {
       />
       <TurnOffWifiModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
 
-      <VStack padding={4} height="100vh" align="center" spacing={4}>
+      <VStack padding={4} minHeight="100vh" align="center" spacing={4}>
         <HStack width="full" align="start">
           <Heading as="h1" size="xl" marginBottom={4}>
             Offline GPT
@@ -139,6 +139,7 @@ export default function App() {
             About
           </Link>
         </HStack>
+        <Spacer />
         <AiChat
           className="custom-ai-chat-comp"
           adapter={webLLMAdapter}
@@ -146,7 +147,6 @@ export default function App() {
             placeholder: "How can I help you today?",
           }}
         />
-        <Spacer />
         <Box width="full" textAlign="center">
           made with ❤️ by{" "}
           <a href="https://twitter.com/_rchaves_" target="_blank">
