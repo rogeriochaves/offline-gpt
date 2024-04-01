@@ -325,7 +325,9 @@ function IntroModal({
             <Spacer />
             <Button
               colorScheme="blue"
-              onClick={() => setModalOpen("turn_off_wifi")}
+              onClick={() =>
+                setModalOpen(navigator.onLine ? "turn_off_wifi" : undefined)
+              }
               isDisabled={!isModelReady}
               rightIcon={<ChevronRight />}
             >
